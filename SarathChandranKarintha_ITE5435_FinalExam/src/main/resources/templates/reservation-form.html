@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Husky Air - Reservation Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b3d1e8;
+            margin: 0;
+            padding: 20px;
+            background-image: url('https://source.unsplash.com/1600x900/?airplane');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .form-label {
+            width: 200px;
+            text-align: left;
+            font-weight: bold;
+        }
+        .form-input {
+            flex-grow: 1;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button-row {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .next-button {
+            padding: 10px 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .next-button:hover {
+            background-color: #003d82;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Fill your Details</h1>
+        
+        <form th:action="@{/submit}" th:object="${reservationDTO}" method="post">
+            <div class="form-row">
+                <div class="form-label">First Name</div>
+                <div class="form-input">
+                    <input type="text" th:field="*{firstName}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Last Name</div>
+                <div class="form-input">
+                    <input type="text" th:field="*{lastName}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">No. Of Passengers</div>
+                <div class="form-input">
+                    <select th:field="*{passengers}" required>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Select Your Class</div>
+                <div class="form-input">
+                    <select th:field="*{travelClass}" required>
+                        <option value="Economy class">Economy class</option>
+                        <option value="Business class">Business class</option>
+                        <option value="First class">First class</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Phone Number</div>
+                <div class="form-input">
+                    <input type="tel" th:field="*{phone}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Time</div>
+                <div class="form-input">
+                    <input type="time" th:field="*{departureTime}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-label">Date of Departing</div>
+                <div class="form-input">
+                    <input type="date" th:field="*{departureDate}" required>
+                </div>
+            </div>
+            
+            <!-- Hidden fields needed for the reservation -->
+            <input type="hidden" th:field="*{origin}" value="Toronto">
+            <input type="hidden" th:field="*{destination}" value="Vancouver">
+            <input type="hidden" th:field="*{flightNumber}" value="HA1234">
+            <input type="hidden" th:field="*{email}" value="customer@example.com">
+            
+            <div class="button-row">
+                <button type="submit" class="next-button">Next</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
